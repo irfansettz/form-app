@@ -28,7 +28,7 @@ function App() {
     }),
   });
   // *form
-  const {register, handleSubmit,setValue, formState:{errors}}= useForm({
+  const {register, handleSubmit, formState:{errors}}= useForm({
     mode: 'all',
     resolver: yupResolver(schema)
   });
@@ -41,7 +41,7 @@ function App() {
   const resetHandler = (e) => {
     e?.preventDefault();
     window.location.reload();
-    // awalnya untuk reset form saya ingin menggunakan state, namun validasi jadi sedikit aneh dan blm menemukan solusi.(validasi perlu diklik di sembarang tampat terlibih dahulu baru bekerja dan saya kurang suka)
+    // awalnya untuk reset form saya ingin menggunakan state, namun validasi jadi sedikit aneh dan blm menemukan solusi.(validasi hanya berkerja dengan skema onblur dan saya kurang suka)
   }
   // *useEffect
   useEffect(() => {
@@ -67,7 +67,7 @@ function App() {
             <p>NonIT</p>
           </div>
           <span style={{ display:'flex', margin: '10px 130px', justifyContent:'left', color:'#fff' }}>Kelas Coding yang Dipilih</span>
-          <select {...register("pilihanKelas")} onChange={(e)=> setValue('pilihanKelas', e.target.value)}>
+          <select {...register("pilihanKelas")} >
             <option value="">Pilih Salah Satu Program</option>
             <option value="golang">Coding Backend with Golang</option>
             <option value="react">Coding Frontend with ReactJs</option>
