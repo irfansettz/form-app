@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import ReactInputMask from 'react-input-mask';
 
 // *css
 import './App.css';
 
 function App() {
   // *var
-  const phoneRegex = /^\+62\d{10,11}$/;
+  const phoneRegex = /^\+62\s\d{9,11}$/;
   // *state
   const [radio, radioSet] = useState(true);
   const [error, errorSet] = useState([]);
@@ -33,8 +34,8 @@ function App() {
     resolver: yupResolver(schema)
   });
   // *handler
-  const submitHandler = (event) => {
-    alert("data berhasil diterima")
+  const submitHandler = (e) => {
+    alert(`Data Pendaftar ${e.nama} berhasil diterima`)
     resetHandler();
   }
 
@@ -57,7 +58,7 @@ function App() {
           <small style={{ display: error?.nama ? '':'none' }}>*{error?.nama?.message}</small>
           <input {...register("email")} type="email" placeholder="Email" autoComplete="off" />
           <small style={{ display: error?.email ? '':'none' }}>*{error?.email?.message}</small>
-          <input {...register('nohp')} type="text" placeholder="No Handphone" autoComplete="off" />
+          <ReactInputMask mask="+62\ 999999999999" maskChar="" {...register('nohp')} type="text" placeholder="No Handphone" autoComplete="off" />
           <small style={{ display: error?.nohp ? '':'none' }}>*{error?.nohp?.message}</small>
           <span style={{ display:'flex', margin: '10px 130px', justifyContent:'left', color:'#fff' }}>Latar Belakang Pendidikan</span>
           <div style={{ display: 'flex', width: "50px",height:'30px' , margin: '0px 115px' }} >
